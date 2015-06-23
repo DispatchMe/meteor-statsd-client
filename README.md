@@ -1,7 +1,7 @@
 A bare-bones StatsD client for Meteor.
 
 # Instantiating
-Add this to your `package.js` file, then create a new client as follows (port is usually 8125):
+Create a new client as follows (port is usually 8125):
 
 ```javascript
 var client = new StatsD('statsd.host.com', 8125, 'myPrefix');
@@ -31,7 +31,7 @@ Use the same syntax as gauge, (but set `type` to `"gauge"`, obviously), and also
 
 ```javascript
 client.track('timerName', 320, {
-	type:'timer'
+	type:'timer',
 	timingInterval:'s'
 });
 ```
