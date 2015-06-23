@@ -1,5 +1,5 @@
 Package.describe({
-  name: 'dispatchme:statsd-client',
+  name: 'dispatch:statsd-client',
   version: '0.0.1',
   // Brief, one-line summary of the package.
   summary: 'A bare-bones StatsD client for meteor',
@@ -19,6 +19,6 @@ Package.onUse(function (api) {
 
 Package.onTest(function (api) {
   api.use('tinytest');
-  api.use('dispatchme:statsd-client');
+  api.use('dispatch:statsd-client');
   api.addFiles('statsd-client-tests.js', 'server');
 });
