@@ -1,6 +1,6 @@
 Package.describe({
   name: 'dispatch:statsd-client',
-  version: '0.0.1',
+  version: '0.0.2',
   // Brief, one-line summary of the package.
   summary: 'A bare-bones StatsD client for meteor',
   // URL to the Git repository containing the source code for this package.
@@ -10,15 +10,15 @@ Package.describe({
   documentation: 'README.md'
 });
 
-Package.onUse(function (api) {
+Package.onUse(function(api) {
   api.use(['underscore'], 'server');
   api.versionsFrom('1.1.0.2');
-  api.addFiles('statsd-client.js', 'server');
+  api.addFiles(['statsd-client.js', 'timer.js'], 'server');
   api.export('StatsD', 'server');
 });
 
-Package.onTest(function (api) {
+Package.onTest(function(api) {
   api.use('tinytest');
-  api.use('dispatch:statsd-client');
+  api.use(['dispatch:statsd-client', 'practicalmeteor:sinon'], 'server');
   api.addFiles('statsd-client-tests.js', 'server');
 });

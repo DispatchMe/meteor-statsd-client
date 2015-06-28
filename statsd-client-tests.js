@@ -1,4 +1,4 @@
-Tinytest.add('StatsD - generate message', function (test) {
+Tinytest.add('StatsD - generate message', function(test) {
   var client = new StatsD('bogus.host', 8125, 'testing', true);
 
 
@@ -15,11 +15,17 @@ Tinytest.add('StatsD - generate message', function (test) {
   }).toString(), 'testing.boop.scoop:0.67|s');
 });
 
-Tinytest.add('StatsD - network', function (test) {
-  var client = new StatsD('bogus.host', 8125, 'testing', true);
-  // Just make sure we get an error when trying to connect to a bogus host.
-  test.throws(function () {
-    client.count('foo.bar', 10);
-  });
 
+Tinytest.add('StatsD - Timer', function(test) {
+  var client = new StatsD('bogus.host', 8125, 'testing', true);
+  var stub = stubs.create('timer', client, 'track');
+  var socketStub = stubs.create('socket', client, '_openSocket');
+  var timer = client.startTimer('foo.bar.baz');
+  Meteor._sleepForMs(100);
+  timer.stop();
+
+  sinon.assert.calledWith(stubs.timer, 'foo.bar.baz', sinon.match.number, {
+    timingInterval: 'ms',
+    type: 'timer'
+  });
 });

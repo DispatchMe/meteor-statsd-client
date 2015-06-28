@@ -27,16 +27,16 @@ client.track('gaugeName', 15, {
 Or use the `gauge` courtesy function: `client.gauge('gaugeName', 10);`
 
 ## Timers
-Use the same syntax as gauge, (but set `type` to `"gauge"`, obviously), and also provide the `timingInterval` if you want it to be something other than `'ms'`:
+You can track time in two different ways. One, time the processes yourself, and use `client.timer('timerName', elapsed, 'interval')`, e.g. `client.timer('myTimer', 20, 'ms');`. Or, you can use the built-in timer:
 
 ```javascript
-client.track('timerName', 320, {
-	type:'timer',
-	timingInterval:'s'
-});
+// This will go into StatsD as key some.timer.value
+var myTimer = client.startTimer('some.timer.value');
+// Do something that takes a while...
+myTimer.stop();
 ```
 
-Or use the `timer` courtesy function: `client.timer('timerName', 320, 's');`
+The above will automatically send the elapsed time to StatsD when you run `myTimer.stop();`
 
 ## Other options
 You can specify the `samplePercentage`, which StatsD uses to determine which percentage of metrics will actually make it to Graphite. Just set `samplePercentage` in the options (third) argument to `client.track`.
