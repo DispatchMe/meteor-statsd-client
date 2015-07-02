@@ -5,10 +5,10 @@ A client will automatically be created for you if you have the following setting
 
 ```json
 {
-	statsd:{
-		host:"statsd.myserver.com",
-		port:8125
-		prefix:"myMetricPrefix"
+	"statsd":{
+		"host":"statsd.myserver.com",
+		"port":8125
+		"prefix":"myMetricPrefix"
 	}
 }
 ```
