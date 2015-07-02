@@ -7,7 +7,7 @@ A client will automatically be created for you if you have the following setting
 {
 	"statsd":{
 		"host":"statsd.myserver.com",
-		"port":8125
+		"port":8125,
 		"prefix":"myMetricPrefix"
 	}
 }
