@@ -12,10 +12,12 @@ StatsD._loadClient = function() {
     }
 
     StatsD._instance = new StatsD(Meteor.settings.statsd.host, Meteor.settings.statsd.port, Meteor.settings.statsd.prefix);
+  } else {
+    console.error('Warning: StatsD is not configured! Metrics will not be tracked');
   }
 
   var notConfigured = function() {
-    throw new Error('StatsD is not configured!');
+    return false;
   };
 
   // Attach the methods of the instance to the main StatsD object for

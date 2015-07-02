@@ -52,13 +52,13 @@ Tinytest.add('StatsD - _loadClient should throw an error if settings are present
   test.throws(StatsD._loadClient);
 });
 
-Tinytest.add('StatsD - default instance methods should throw an error if _loadClient failed or was not run', function(test) {
+Tinytest.add('StatsD - default instance methods just return if _loadClient failed or was not run', function(test) {
   Meteor.settings.statsd = undefined;
   StatsD._loadClient();
-  test.throws(StatsD.count);
-  test.throws(StatsD.gauge);
-  test.throws(StatsD.timer);
-  test.throws(StatsD.startTimer);
+  test.isFalse(StatsD.count());
+  test.isFalse(StatsD.gauge());
+  test.isFalse(StatsD.timer());
+  test.isFalse(StatsD.startTimer());
   // Reset
   StatsD._instance = null;
 });
